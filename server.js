@@ -1,10 +1,13 @@
 const
-  port = 3000,
   path = require('path'),
   express = require('express'),
   http = require('http'),
-  app = express(),
   bodyParser = require('body-parser'),
+  SocketIo = require('socket.io');
+
+const
+  port = 3000,
+  app = express(),
   api = require('./server/routes/api');
 
 app.use(bodyParser.json());
@@ -29,4 +32,30 @@ const server = http.Server(app);
 server
   .listen(port, () => {
     console.log(`App running on localhost:${port}`);
+  });
+
+// Setup socket
+const
+  SocketConnectionService = require(
+    './server/services/socket-connection.service'),
+  socketIo = SocketIo(server),
+  socketConnections = {};
+
+socketIo
+  .on('connection', (socket) => {
+    Reflect
+      .set(
+        socketConnections,
+        socket.id,
+        new SocketConnectionService(socketIo, socket)
+      );
+  });
+
+socketIo
+  .on('disconnect', (socket) => {
+    Reflect
+      .deleteProperty(
+        socketConnections,
+        socket.id
+      );
   });
