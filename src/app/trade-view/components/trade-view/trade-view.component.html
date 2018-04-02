@@ -1,0 +1,18 @@
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Sell Orders</h4>
+            <app-order-book [baseAsset]="baseAsset"
+                            [quoteAsset]="quoteAsset"
+                            [orderBookEntries]="sellOrderBookEntries">
+            </app-order-book>
+        </div>
+        <div class="col-md-6">
+            <h4>Buy Orders</h4>
+            <app-order-book [baseAsset]="baseAsset"
+                            [quoteAsset]="quoteAsset"
+                            [orderBookEntries]="buyOrderBookEntries">
+            </app-order-book>
+        </div>
+    </div>
+</div>

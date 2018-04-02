@@ -1,0 +1,16 @@
+<table class="table table-striped table-bordered table-text-small">
+    <thead class="thead-dark text-center">
+    <tr>
+        <th>Price</th>
+        <th>Amount {{baseAsset}}</th>
+        <th>Volume {{quoteAsset}}</th>
+    </tr>
+    </thead>
+    <tbody class="text-right">
+    <tr *ngFor="let orderBookEntry of orderBookEntries">
+        <td>{{orderBookEntry.price | number:'1.8-8'}}</td>
+        <td>{{orderBookEntry.amount | number:'1.8-8'}}</td>
+        <td>{{orderBookEntry.volume | number:'1.8-8'}}</td>
+    </tr>
+    </tbody>
+</table>
