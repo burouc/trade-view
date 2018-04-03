@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderBookEntry } from '../../models';
+import { TradeViewService } from '../../services/trade-view.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-trade-view',
@@ -9,36 +11,26 @@ export class TradeViewComponent implements OnInit {
   public baseAsset = 'ETH';
   public quoteAsset = 'BTC';
 
-  // TODO: This is mock data, it should be fetched from BE.
-  public buyOrderBookEntries: Array<OrderBookEntry> = [
-    {
-      price: 0.1,
-      amount: 2,
-      volume: 0.2
-    },
-    {
-      price: 0.05,
-      amount: 3,
-      volume: 0.15
-    }
-  ];
-  public sellOrderBookEntries: Array<OrderBookEntry> = [
-    {
-      price: 0.15,
-      amount: 2,
-      volume: 0.3
-    },
-    {
-      price: 0.2,
-      amount: 10,
-      volume: 2
-    }
-  ];
+  public buyOrderBook$: Observable<Array<OrderBookEntry>>;
+  public sellOrderBook$: Observable<Array<OrderBookEntry>>;
 
-  constructor() {
+  constructor(private tradeViewService: TradeViewService) {
+    this.buyOrderBook$ = this.tradeViewService.buyOrderBook$;
+    this.sellOrderBook$ = this.tradeViewService.sellOrderBook$;
   }
 
   ngOnInit() {
+    this
+      .tradeViewService
+      .isConnected$
+      .subscribe((isConnected: boolean) => {
+        if (isConnected) {
+          this.tradeViewService.emitOrderBookConfig(this.baseAsset, this.quoteAsset);
+        } else {
+          // TODO: Add indication that socket is disconnected
+        }
+      });
+    this.tradeViewService.connectToSocket();
   }
 
 }

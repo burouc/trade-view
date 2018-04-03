@@ -4,14 +4,14 @@
             <h4>Sell Orders</h4>
             <app-order-book [baseAsset]="baseAsset"
                             [quoteAsset]="quoteAsset"
-                            [orderBookEntries]="sellOrderBookEntries">
+                            [orderBookEntries]="sellOrderBook$ | async">
             </app-order-book>
         </div>
         <div class="col-md-6">
             <h4>Buy Orders</h4>
             <app-order-book [baseAsset]="baseAsset"
                             [quoteAsset]="quoteAsset"
-                            [orderBookEntries]="buyOrderBookEntries">
+                            [orderBookEntries]="buyOrderBook$ | async">
             </app-order-book>
         </div>
     </div>

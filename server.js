@@ -38,8 +38,12 @@ server
 const
   SocketConnectionService = require(
     './server/services/socket-connection.service'),
+  MockDataService = require('./server/services/mock-data.service'),
   socketIo = SocketIo(server),
   socketConnections = {};
+
+// Fill the order book store with mock data.
+MockDataService.fillOrderBookStore();
 
 socketIo
   .on('connection', (socket) => {
