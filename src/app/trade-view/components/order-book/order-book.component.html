@@ -8,9 +8,14 @@
     </thead>
     <tbody class="text-right">
     <tr *ngFor="let orderBookEntry of orderBookEntries">
-        <td>{{orderBookEntry.price | number:'1.8-8'}}</td>
-        <td>{{orderBookEntry.amount | number:'1.8-8'}}</td>
-        <td>{{orderBookEntry.volume | number:'1.8-8'}}</td>
+        <td>{{orderBookEntry.price | number:'1.6-6'}}</td>
+        <td>{{orderBookEntry.amount | number:'1.6-6'}}</td>
+        <td>{{orderBookEntry.volume | number:'1.6-6'}}</td>
+    </tr>
+    <tr *ngIf="orderBookEntries && !orderBookEntries.length">
+        <td colspan="3" class="text-center">
+            No data available
+        </td>
     </tr>
     </tbody>
 </table>

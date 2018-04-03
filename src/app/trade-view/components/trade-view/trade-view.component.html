@@ -1,18 +1,26 @@
 <div>
     <div class="row">
         <div class="col-md-6">
-            <h4>Sell Orders</h4>
+            <h5>Sell Orders</h5>
             <app-order-book [baseAsset]="baseAsset"
                             [quoteAsset]="quoteAsset"
                             [orderBookEntries]="sellOrderBook$ | async">
             </app-order-book>
+            <app-order-form [baseAsset]="baseAsset"
+                            [quoteAsset]="quoteAsset"
+                            [orderType]="orderType.Buy">
+            </app-order-form>
         </div>
         <div class="col-md-6">
-            <h4>Buy Orders</h4>
+            <h5>Buy Orders</h5>
             <app-order-book [baseAsset]="baseAsset"
                             [quoteAsset]="quoteAsset"
                             [orderBookEntries]="buyOrderBook$ | async">
             </app-order-book>
+            <app-order-form [baseAsset]="baseAsset"
+                            [quoteAsset]="quoteAsset"
+                            [orderType]="orderType.Sell">
+            </app-order-form>
         </div>
     </div>
 </div>
