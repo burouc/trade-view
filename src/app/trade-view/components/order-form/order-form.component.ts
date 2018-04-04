@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { OrderFormValues, OrderType } from '../../models';
+import { NumberValidators } from '../../validators/number.validators';
 
 @Component({
   selector: 'app-order-form',
@@ -25,7 +26,11 @@ export class OrderFormComponent implements OnInit {
     this.orderForm = this
       .formBuilder
       .group({
-        price: [0, [Validators.required, Validators.pattern(this.numberRegex), Validators.min(0.000001)]],
+        price: [0, [
+          Validators.required,
+          Validators.pattern(this.numberRegex),
+          Validators.min(0.000001),
+          NumberValidators.maxDecimalPlaces(6)]],
         amount: [0, [Validators.required, Validators.pattern(this.numberRegex), Validators.min(0.001)]]
       });
   }
