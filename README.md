@@ -2,12 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
 
+A app which shows a simple trade view for a crypto market place. All the back end is mocked so the state resets when the server app is restarted.
+
 To run this project you will need a LTS version of [nodejs](https://nodejs.org) installed and also the latest
 version of [yarn](https://yarnpkg.com) package manager
 
 ## Installation
 
-After cloning the repository you have to run the `yarn` command inside the project root directory.
+After cloning the repository you have to run the `yarn install` command inside the project root directory.
 This will install all the dependencies.
 
 ## Development
