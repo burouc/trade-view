@@ -7,6 +7,8 @@ class SocketConnectionService {
     this.io = io;
     this.client = client;
 
+    this.orderBook = null;
+
     this.initListeners();
   }
 
@@ -27,6 +29,14 @@ class SocketConnectionService {
     if (!orderBook) {
       return;
     }
+
+    // Subscribe to order book changes
+    orderBook
+      .on('changed', () => {
+        this
+          .client
+          .emit('orderBook', OrderBookUtils.formatOrderBook(orderBook));
+      });
 
     this
       .client

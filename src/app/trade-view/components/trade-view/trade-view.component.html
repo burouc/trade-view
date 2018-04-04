@@ -6,11 +6,6 @@
                             [quoteAsset]="quoteAsset"
                             [orderBookEntries]="sellOrderBook$ | async">
             </app-order-book>
-            <app-order-form [baseAsset]="baseAsset"
-                            [quoteAsset]="quoteAsset"
-                            [orderType]="orderType.Buy"
-                            (placeOrder)="onPlaceOrder($event)">
-            </app-order-form>
         </div>
         <div class="col-md-6">
             <h5>Buy Orders</h5>
@@ -18,10 +13,21 @@
                             [quoteAsset]="quoteAsset"
                             [orderBookEntries]="buyOrderBook$ | async">
             </app-order-book>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <app-order-form [baseAsset]="baseAsset"
+                            [quoteAsset]="quoteAsset"
+                            [orderType]="orderType.Buy"
+                            (placeOrder)="onPlaceOrder($event, orderType.Buy)">
+            </app-order-form>
+        </div>
+        <div class="col-md-6">
             <app-order-form [baseAsset]="baseAsset"
                             [quoteAsset]="quoteAsset"
                             [orderType]="orderType.Sell"
-                            (placeOrder)="onPlaceOrder($event)">
+                            (placeOrder)="onPlaceOrder($event, orderType.Sell)">
             </app-order-form>
         </div>
     </div>
