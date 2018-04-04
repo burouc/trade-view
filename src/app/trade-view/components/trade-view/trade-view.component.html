@@ -8,7 +8,8 @@
             </app-order-book>
             <app-order-form [baseAsset]="baseAsset"
                             [quoteAsset]="quoteAsset"
-                            [orderType]="orderType.Buy">
+                            [orderType]="orderType.Buy"
+                            (placeOrder)="onPlaceOrder($event)">
             </app-order-form>
         </div>
         <div class="col-md-6">
@@ -19,7 +20,8 @@
             </app-order-book>
             <app-order-form [baseAsset]="baseAsset"
                             [quoteAsset]="quoteAsset"
-                            [orderType]="orderType.Sell">
+                            [orderType]="orderType.Sell"
+                            (placeOrder)="onPlaceOrder($event)">
             </app-order-form>
         </div>
     </div>

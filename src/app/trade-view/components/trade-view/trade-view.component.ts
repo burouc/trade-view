@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderBookEntry } from '../../models';
-import { TradeViewService } from '../../services/trade-view.service';
 import { Observable } from 'rxjs/Observable';
-import { OrderType } from '../../models/order-type.enum';
+
+import { OrderBookEntry, OrderType } from '../../models';
+import { TradeViewApiService, TradeViewService } from '../../services';
+import { Order } from '../../models/order.model';
+import { OrderFormValues } from '../../models/order-form-values.model';
 
 @Component({
   selector: 'app-trade-view',
@@ -17,7 +19,8 @@ export class TradeViewComponent implements OnInit {
 
   public orderType: typeof OrderType = OrderType;
 
-  constructor(private tradeViewService: TradeViewService) {
+  constructor(private tradeViewService: TradeViewService,
+              private tradeViewApiService: TradeViewApiService) {
     this.buyOrderBook$ = this.tradeViewService.buyOrderBook$;
     this.sellOrderBook$ = this.tradeViewService.sellOrderBook$;
   }
@@ -36,4 +39,23 @@ export class TradeViewComponent implements OnInit {
     this.tradeViewService.connectToSocket();
   }
 
+  public onPlaceOrder(orderFormValues: OrderFormValues, orderType: OrderType): void {
+    const order: Order = {
+      price: orderFormValues.price,
+      amount: orderFormValues.amount,
+      type: orderType,
+      baseAsset: this.baseAsset,
+      quoteAsset: this.quoteAsset
+    };
+
+    this
+      .tradeViewApiService
+      .placeOrder(order)
+      .then((orderResult) => {
+        // TODO: Show success message.
+      })
+      .catch((err) => {
+        // TODO: Show error message.
+      });
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Order, OrderType } from '../../models';
+import { OrderFormValues, OrderType } from '../../models';
 
 @Component({
   selector: 'app-order-form',
@@ -15,7 +15,7 @@ export class OrderFormComponent implements OnInit {
 
   @Input() suggestedPrice = 0;
 
-  @Output() placeOrder: EventEmitter<Order> = new EventEmitter();
+  @Output() placeOrder: EventEmitter<OrderFormValues> = new EventEmitter();
 
   public orderForm: FormGroup;
 
@@ -56,6 +56,12 @@ export class OrderFormComponent implements OnInit {
       return;
     }
 
-    // TODO: Emit place order.
+    this
+      .placeOrder
+      .emit({
+        amount: Number(this.orderForm.value.amount),
+        price: Number(this.orderForm.value.price),
+        type: this.orderType
+      });
   }
 }

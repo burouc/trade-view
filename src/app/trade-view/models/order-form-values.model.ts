@@ -1,8 +1,6 @@
 import { OrderType } from './order-type.enum';
 
-export interface Order {
-  baseAsset: string;
-  quoteAsset: string;
+export interface OrderFormValues {
   price: number;
   amount: number;
   type: OrderType;
