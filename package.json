@@ -6,6 +6,7 @@
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.config.js",
     "start:server": "nodemon server.js",
+    "start:all": "ng build && node server.js",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",

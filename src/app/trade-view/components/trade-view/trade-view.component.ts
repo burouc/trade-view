@@ -56,11 +56,10 @@ export class TradeViewComponent implements OnInit {
     this
       .tradeViewApiService
       .placeOrder(order)
-      .then((orderResult) => {
-        // TODO: Show success message.
+      .then(() => {
         this.alertsService.showSuccessMessage('Order placed successfully!');
       })
-      .catch((err) => {
+      .catch(() => {
         this.alertsService.showErrorMessage(`Couldn't place order!`);
       });
   }
