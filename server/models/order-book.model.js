@@ -107,7 +107,7 @@ class OrderBook extends EventEmitter {
 
     if (remainingTotal > 0) {
       remainingAmount = fulfilledOrders.length
-        ? _.floor(remainingTotal / price)
+        ? _.floor(remainingTotal / price, this.precision)
         : remainingAmount;
 
       orders.push(
@@ -186,7 +186,7 @@ class OrderBook extends EventEmitter {
 
     if (remainingTotal > 0) {
       remainingAmount = fulfilledOrders.length
-        ? _.floor(remainingTotal / price)
+        ? _.floor(remainingTotal / price, this.precision)
         : remainingAmount;
 
       orders.push(
@@ -239,6 +239,10 @@ class OrderBook extends EventEmitter {
           this.combinedSellOrders.push([price, amount]);
         }
       }
+
+      if(!this.combinedSellOrders.length){
+        this.combinedSellOrders.push([price, amount]);
+      }
     }
     else {
       for (let i = 0; i < this.combinedBuyOrders.length; i++) {
@@ -268,6 +272,10 @@ class OrderBook extends EventEmitter {
         if (i === this.combinedBuyOrders.length - 1) {
           this.combinedBuyOrders.push([price, amount]);
         }
+      }
+
+      if(!this.combinedBuyOrders.length){
+        this.combinedBuyOrders.push([price, amount]);
       }
     }
 
