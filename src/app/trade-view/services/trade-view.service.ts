@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
-import * as io from 'socket.io-client';
 import { Observable } from 'rxjs/Observable';
-import { OrderBookEntry } from '../models/order-book-entry.model';
+import * as io from 'socket.io-client';
+
+import { OrderBookEntry } from '../models';
 
 @Injectable()
 export class TradeViewService {

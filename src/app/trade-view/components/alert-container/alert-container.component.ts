@@ -1,9 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
-import { AlertsService } from '../../services/alerts.service';
-import { AlertType } from '../../models/alert-type.enum';
-
 import { Subscription } from 'rxjs/Subscription';
-import { AlertConfig } from '../../models/alert-config.model';
+
+import { AlertsService } from '../../services/alerts.service';
+import { AlertConfig, AlertType } from '../../models';
 
 @Component({
   selector: 'app-alert-container',

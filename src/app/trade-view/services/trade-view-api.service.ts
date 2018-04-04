@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Order } from '../models/order.model';
 import { HttpClient } from '@angular/common/http';
+
+import { Order } from '../models';
 
 @Injectable()
 export class TradeViewApiService {

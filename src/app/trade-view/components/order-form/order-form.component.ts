@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { OrderFormValues, OrderType } from '../../models';
@@ -8,7 +8,7 @@ import { NumberValidators } from '../../validators/number.validators';
   selector: 'app-order-form',
   templateUrl: './order-form.component.html'
 })
-export class OrderFormComponent implements OnInit {
+export class OrderFormComponent {
   @Input() orderType: OrderType;
 
   @Input() baseAsset: string;
@@ -35,9 +35,6 @@ export class OrderFormComponent implements OnInit {
           NumberValidators.maxDecimalPlaces(6)]],
         amount: [0, [Validators.required, Validators.pattern(this.numberRegex), Validators.min(0.001)]]
       });
-  }
-
-  public ngOnInit() {
   }
 
   public get title(): string {

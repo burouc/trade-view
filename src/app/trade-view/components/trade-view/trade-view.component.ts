@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { OrderBookEntry, OrderType } from '../../models';
-import { TradeViewApiService, TradeViewService } from '../../services';
-import { Order } from '../../models/order.model';
-import { OrderFormValues } from '../../models/order-form-values.model';
-import { AlertsService } from '../../services/alerts.service';
+import { Order, OrderBookEntry, OrderFormValues, OrderType } from '../../models';
+import { AlertsService, TradeViewApiService, TradeViewService } from '../../services';
 
 @Component({
   selector: 'app-trade-view',
