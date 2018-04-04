@@ -5,6 +5,7 @@ import { OrderBookEntry, OrderType } from '../../models';
 import { TradeViewApiService, TradeViewService } from '../../services';
 import { Order } from '../../models/order.model';
 import { OrderFormValues } from '../../models/order-form-values.model';
+import { AlertsService } from '../../services/alerts.service';
 
 @Component({
   selector: 'app-trade-view',
@@ -19,8 +20,12 @@ export class TradeViewComponent implements OnInit {
 
   public orderType: typeof OrderType = OrderType;
 
+  public isSocketConnected = false;
+  public isOrderPlacementInProgress = false;
+
   constructor(private tradeViewService: TradeViewService,
-              private tradeViewApiService: TradeViewApiService) {
+              private tradeViewApiService: TradeViewApiService,
+              private alertsService: AlertsService) {
     this.buyOrderBook$ = this.tradeViewService.buyOrderBook$;
     this.sellOrderBook$ = this.tradeViewService.sellOrderBook$;
   }
@@ -32,9 +37,9 @@ export class TradeViewComponent implements OnInit {
       .subscribe((isConnected: boolean) => {
         if (isConnected) {
           this.tradeViewService.emitOrderBookConfig(this.baseAsset, this.quoteAsset);
-        } else {
-          // TODO: Add indication that socket is disconnected
         }
+
+        this.isSocketConnected = isConnected;
       });
     this.tradeViewService.connectToSocket();
   }
@@ -53,9 +58,10 @@ export class TradeViewComponent implements OnInit {
       .placeOrder(order)
       .then((orderResult) => {
         // TODO: Show success message.
+        this.alertsService.showSuccessMessage('Order placed successfully!');
       })
       .catch((err) => {
-        // TODO: Show error message.
+        this.alertsService.showErrorMessage(`Couldn't place order!`);
       });
   }
 }

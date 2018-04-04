@@ -1,4 +1,20 @@
 <div>
+    <app-alert-container></app-alert-container>
+
+    <div class="row">
+        <div class="col-md-8">
+            <h2 class="text-left">
+                Trade View
+            </h2>
+        </div>
+
+        <div class="col-md-4">
+            <div class="float-right mt-2 badge badge-pill "
+                 [ngClass]="{'badge-success': isSocketConnected, 'badge-danger': !isSocketConnected}">
+                {{ isSocketConnected ? 'Connected' : 'Not connected' }}
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-6">
             <h5>Sell Orders</h5>
@@ -20,6 +36,7 @@
             <app-order-form [baseAsset]="baseAsset"
                             [quoteAsset]="quoteAsset"
                             [orderType]="orderType.Buy"
+                            [disabled]="!isSocketConnected || isOrderPlacementInProgress"
                             (placeOrder)="onPlaceOrder($event, orderType.Buy)">
             </app-order-form>
         </div>
@@ -27,6 +44,7 @@
             <app-order-form [baseAsset]="baseAsset"
                             [quoteAsset]="quoteAsset"
                             [orderType]="orderType.Sell"
+                            [disabled]="!isSocketConnected || isOrderPlacementInProgress"
                             (placeOrder)="onPlaceOrder($event, orderType.Sell)">
             </app-order-form>
         </div>

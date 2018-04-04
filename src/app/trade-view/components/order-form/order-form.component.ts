@@ -16,6 +16,8 @@ export class OrderFormComponent implements OnInit {
 
   @Input() suggestedPrice = 0;
 
+  @Input() disabled = false;
+
   @Output() placeOrder: EventEmitter<OrderFormValues> = new EventEmitter();
 
   public orderForm: FormGroup;
